@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import org.joml.Vector2f;
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
@@ -38,9 +39,9 @@ public class LevelEditorScene extends Scene {
 
     private float[] _vertexArray = {
 
-        0.5f, -0.5f, 0.0f,          1.0f, 0.0f, 0.0f, 1.0f,
-        -0.5f, 0.5f, 0.0f,          0.0f, 1.0f, 0.0f, 1.0f,
-        0.5f, 0.5f, 0.0f,           0.0f, 0.0f, 1.0f, 1.0f,
+        100.5f, -0.5f, 0.0f,          1.0f, 0.0f, 0.0f, 1.0f,
+        -0.5f, 100.5f, 0.0f,          0.0f, 1.0f, 0.0f, 1.0f,
+        100.5f, 0.5f, 0.0f,           0.0f, 0.0f, 1.0f, 1.0f,
         -0.5f, -0.5f, 0.0f,         1.0f, 1.0f, 0.0f, 1.0f,
 
     };
@@ -59,6 +60,7 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void init() {
+        _camera = new Camera(new Vector2f(0, 0));
         // =========================
         // Compile and link shaders.
         // =========================
@@ -107,6 +109,8 @@ public class LevelEditorScene extends Scene {
 
         // Bind the shader program
         _defaultShader.use();
+        _defaultShader.uploadMat4f("uProjection", _camera.projectionMatrix);
+        _defaultShader.uploadMat4f("uView", _camera.viewMatrix);
 
         // Bind the VAO
         glBindVertexArray(_vaoId);

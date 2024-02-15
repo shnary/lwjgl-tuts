@@ -1,6 +1,8 @@
 package jade;
 
 public abstract class Scene {
+
+    protected Camera _camera;
     
     public Scene() {
 

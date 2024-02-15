@@ -1,12 +1,18 @@
 {
     "configurations": [
-        
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "lwjgl-tuts_78b7e2cc"
+        },
         {
             "type": "java",
             "name": "Launch Java Program",
             "request": "launch",
             "mainClass": "",
             "vmArgs": "-enableAssertions"
-        },
+        }
     ]
 }
